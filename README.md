@@ -9,5 +9,5 @@ The goals of this project are to:
 
 (recommended improvement)
 Future Implementations:
-1. receive feedback from a trained model to see what they can do to improve
+1. call OpenAI API or Google Cloud AI to analyze patterns and provide feedback
 2. connect with 3rd party API's like Apple Health Kit, FitBit API to integrate heart rate data
