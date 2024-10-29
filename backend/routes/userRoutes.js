@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 //import user model
-const User = require('../models/user');
+const User = require('./models/user');
 
 // define the route for the User model
 router.post('/', async(req, res) => {
@@ -23,5 +23,6 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: 'Error retrieving users'});
     }
 });
+
 
 module.exports = router;

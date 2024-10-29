@@ -1,11 +1,13 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database'); //change the path
 
+
 const User = sequelize.define('User', {
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
     },
     name: {
         type: DataTypes.STRING,
@@ -16,7 +18,7 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     }
