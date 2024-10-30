@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../models"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../config"
+		}
+	],
+	"settings": {}
+}

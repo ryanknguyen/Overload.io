@@ -14,13 +14,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/userProgress', userProgressRouter);
+//app.use('/api/exercises', exerciseRouter);
+//app.use('/api/workouts', workoutRouter);
+app.use('/api/workoutExercise', workoutExerciseRouter);
 
-/*
-app.use('/api/exercises', exerciseRouter);
-app.use('/api/workouts', workoutRouter);
-app.use('/api/workoutExercises'. workoutExercisesRouter);
-
-*/
 
 // route to test the server
 app.get('/', (req, res) => {
@@ -32,3 +29,4 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 });
 
+module.exports = app;

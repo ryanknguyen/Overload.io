@@ -5,8 +5,8 @@
 // heart rate
 // rpe
 
-const {DataTypes} = require('sequeilize');
-const sequelize = require('../config/database');
+const {DataTypes} = require('sequelize');
+const sequelize = require('../../config/database');
 
 const WorkoutExercise = sequelize.define('WorkoutExercise', {
     workoutId: {

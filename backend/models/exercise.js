@@ -2,7 +2,7 @@
 // exercise_name
 
 const {DataTypes} = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../config/database');
 
 const Exercise = sequelize.define('Exercise', {
     exerciseId: {
