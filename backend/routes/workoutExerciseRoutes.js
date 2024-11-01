@@ -14,4 +14,31 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.delete('/:workoutId/:exerciseId', async(req,res) =>{
+    try{
+        const {workoutId, exerciseId} = req.body;
+        const deleted = await WorkoutExercise.destroy({where: {workoutId, exerciseId}});
+
+        if (deleted){
+            req.status(200).json({message: 'workoutExercise entry was successfully deleted'});
+        }
+        else{
+            req.status(404).josn({message: 'workoutExercise entry not found and failed to delete'});
+        }
+    }catch (error){
+        req.status(500).json({error: 'An error occurred on our end while attempting to delete the workoutExercise entry'})
+    }
+});
+
+// router.put(':/workoutId/:exerciseId', async(req, res) =>{
+//     const{workoutId, exerciseId} = req.params;
+//     const{sets, reps, heartRate, RPE} = req.params;
+
+//     try{
+//         const [update] = await WorkoutExercise.update(
+//             {}
+//         )
+//     }
+// })
+
 module.exports = router;

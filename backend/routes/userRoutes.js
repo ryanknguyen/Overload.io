@@ -10,7 +10,7 @@ router.post('/', async(req, res) => {
         const newUser = await User.create({ name, email });
         res.status(201).json(newUser);
     } catch (error){
-        res.status(500).json({ error: 'Error creating user' });
+        res.status(500).json({ error: 'Error adding new user, please double check your input' });
     }
 })
 

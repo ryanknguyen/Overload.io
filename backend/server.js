@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/userProgress', userProgressRouter);
-//app.use('/api/exercises', exerciseRouter);
+app.use('/api/exercise', exerciseRouter);
 //app.use('/api/workouts', workoutRouter);
 app.use('/api/workoutExercise', workoutExerciseRouter);
 
@@ -24,9 +24,10 @@ app.get('/', (req, res) => {
     res.send("Hi! It's me from the backend ('server.js')")
 });
 
-// start the server
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-});
 
+if (process.env.NODE_ENV !== 'test'){
+    app.listen(port, () => {
+        console.log('Server is running on port ${port}')
+    });
+}
 module.exports = app;

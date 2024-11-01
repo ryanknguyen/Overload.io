@@ -50,5 +50,5 @@ describe('User API routes', () => {
 
         expect(response.status).toBe(500);
         expect(response.body).toHaveProperty('error', 'Error retrieving user data. Something happened on our end :(');
-    })
+    });
 });

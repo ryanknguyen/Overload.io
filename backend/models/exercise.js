@@ -15,7 +15,6 @@ const Exercise = sequelize.define('Exercise', {
         type: DataTypes.STRING,
         allowNull: false
     }
-
 });
 
 module.exports = Exercise;
