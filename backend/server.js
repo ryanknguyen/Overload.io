@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/userProgress', userProgressRouter);
 app.use('/api/exercise', exerciseRouter);
-//app.use('/api/workouts', workoutRouter);
+app.use('/api/workout', workoutRouter);
 app.use('/api/workoutExercise', workoutExerciseRouter);
 
 

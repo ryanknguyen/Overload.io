@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+//this API route is meant to manipulate specific exercise entries within a single workout entry
 const WorkoutExercise = require('../models/workoutExercise');
 
 router.post('/', async (req, res) => {
@@ -20,13 +21,13 @@ router.delete('/:workoutId/:exerciseId', async(req,res) =>{
         const deleted = await WorkoutExercise.destroy({where: {workoutId, exerciseId}});
 
         if (deleted){
-            req.status(200).json({message: 'workoutExercise entry was successfully deleted'});
+            res.status(200).json({message: 'workoutExercise entry was successfully deleted'});
         }
         else{
-            req.status(404).josn({message: 'workoutExercise entry not found and failed to delete'});
+            res.status(404).josn({message: 'workoutExercise entry not found and failed to delete'});
         }
     }catch (error){
-        req.status(500).json({error: 'An error occurred on our end while attempting to delete the workoutExercise entry'})
+        res.status(500).json({error: 'An error occurred on our end while attempting to delete the workoutExercise entry'})
     }
 });
 
