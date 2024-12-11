@@ -6,7 +6,7 @@ import chest from '../Assets/chest.png';
 import back from '../Assets/back.png';
 import shoulders from '../Assets/shoulders.png';
 import legs from '../Assets/legs.png';
-import '../Styles/Buttons.css'
+import '../Styles/Button.css'
 
 function Workouts(){
 
@@ -25,6 +25,8 @@ function Workouts(){
     const [currentGroup, setCurrentGroup] = useState(null); //track the selected muscle group
     const [selectedExercise, setSelectedExercise] = useState(null); //track the selected excerise
 
+    const [hoverIndex, setHoverIndex] = useState(null); //tracks which box is being hovered over
+   
     //Handlers
     const handleMuscleGroupClick = (group) => {
         setCurrentGroup(group);
@@ -39,6 +41,14 @@ function Workouts(){
         setSelectedExercise(null);
         setShowForm(false);
     }
+
+    const handleMouseEnter = (index) => {
+        setHoverIndex(index); // set hovered index
+    };
+
+    const handleMouseLeave = () => {
+        setHoverIndex(null); //reset when no box is being hovered over
+    };
 
     return(
         <div style={styles.container}>
@@ -58,8 +68,16 @@ function Workouts(){
                             key={index}
                             style={{
                                 ...styles.box,
+                                backgroundColor: hoverIndex === index ? "#30A6E9": "#f9f9f9",
+                                transform: hoverIndex === index ? "translateY(-10px)" : "translateY(0)",
+                                boxShadow: hoverIndex === index
+                                    ? "0 6px 8px rgba(0,0,0,0.2)" //stronger shadow on hover
+                                    : "0 4px 6px rgba(0,0,0,0.1)", //normal shadow
                                 animationDelay: `${index * 0.2}s`, //staggered delay for fade-in
+                                transition: "background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease"
                             }}
+                            onMouseEnter={() => setHoverIndex(index)} //update hover index when mouse enters box
+                            onMouseLeave={() => setHoverIndex(null)} //reset hover index when mouse leaves box
                             onClick={()=>handleMuscleGroupClick(group)}
                         >
                             <img
@@ -99,19 +117,29 @@ function Workouts(){
                         ))}
                     </select>
                     
+                    <div style={styles.backButtonContainer}>
+                        {/*Back Button*/}
+                        <button className="navButton" onClick={handleBackToGrid}>
+                            {"\u2190"} {/*left arrow in unicode*/} 
+                        </button>
+                    </div>
+
                     {/* "Next" button */}
                     <button
-                    className="navButton" style={selectedExercise ? styles.nextButton : styles.nextButtonDisabled}
-                    onClick={() => {
+                        className="navButton"
+                        onClick={() => {
                         setShowForm(true)
                         
                         console.log("showForm:", true);
-                    }}
-                    //proceed to workout form
-                    disabled={!selectedExercise} //disable button if no exercise is selected
+                        }}
+                        
+                        //proceed to workout form
+                        disabled={!selectedExercise} //disable button if no exercise is selected
                     >
-                         {"\u2192"}
+                        Next
                     </button>
+                    
+                
 
                     {/*Add Custom Exercise Button*/}
                     <button
@@ -121,10 +149,7 @@ function Workouts(){
                         Add Custom Exercise
                     </button>
 
-                    {/*Back Button*/}
-                    <button className="navButton" onClick={handleBackToGrid}>
-                        {"\u2190"} {/*left arrow in unicode*/} 
-                    </button>
+                   
                 </div>
             )}
 
@@ -154,7 +179,8 @@ const styles={
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '20px',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        overflow: 'visible'
     },
     box: {
         backgroundColor: '#f9f9f9',
@@ -163,7 +189,7 @@ const styles={
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         padding: '10px',
         textAlign: 'center',
-        transition: 'transform 0.2s, box-shadow 0.2s',
+        transition: 'background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease',
         cursor: 'pointer',
         opacity: 0,
         animation: 'fadeIn 2s ease forwards' //apply fadeIn animation
@@ -196,7 +222,7 @@ const styles={
     },
     customButton: {
         marginTop: '60px',
-        backgroundColor: '#4caf50',
+        backgroundColor: '#30A6E9',
         color: '#fff',
         padding: '10px 15px',
         border: 'none',
@@ -209,18 +235,25 @@ const styles={
         height: '30px',
         width: '220px',
         textAlign: 'center'
+    },
+    backButtonContainer:{
+        position: 'fixed',
+        bottom: '50px',
+        left: '50px',
+        zIndex: 1000
     }
+
 };
 
 const fadeInStyle = `
     @keyframes fadeIn{
         from {
             opacity: 0;
-            transform: translateY(20px);
+            // transform: translateY(20px);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            // transform: translateY(0);
         }
     }
 `;
