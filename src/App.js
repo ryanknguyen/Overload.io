@@ -13,10 +13,14 @@ function App() {
       <NavBar/> {/*NavBar is always visible*/}
       <div>
         <h1> Overload.io Fitness Tracker </h1>
-        <WorkoutForm/>
         <Routes>
           <Route path='/'element={<Home />} />
-          <Route path="/workouts" element={<Workouts/>}/>
+          <Route path="/workouts" element={
+            <div>
+            <Workouts/> 
+            </div>
+          }
+          />
         </Routes>
         
       </div>
